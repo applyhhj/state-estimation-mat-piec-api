@@ -9,6 +9,7 @@ zone.z=zone.zTrue;
 VExt=zone.VExtlf;
 %% begin estimation
 if ~isempty(zone.ref)&&isempty(zone.f)
+    zone.VEst(zone.ref(1))=zone.VRef;
     converged=1;
 else
     [zone, converged, i] = ApiStateEstimate(zone,VExt, mpopt);

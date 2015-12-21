@@ -1,6 +1,6 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
   <configuration build-checksum="947952389" file="F:\projects\state-estimation-mat-piec-api\graph\splitter.prj" location="F:\projects\state-estimation-mat-piec-api\graph" name="splitter" preferred-package-location="F:\projects\state-estimation-mat\matlab\Splitter\redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.library" target-name="MATLAB Compiler for Libraries and Classes">
-    <param.appname>Splitter</param.appname>
+    <param.appname>splitter</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
@@ -11,7 +11,7 @@
     <param.description />
     <param.screenshot />
     <param.guid />
-    <param.installpath.string>\Splitter\</param.installpath.string>
+    <param.installpath.string>\splitter\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
     <param.logo />
     <param.install.notes />
@@ -19,11 +19,11 @@
     <param.output>F:\projects\state-estimation-mat\matlab\Splitter\redistribution</param.output>
     <param.user.defined.mcr.options />
     <param.embed.ctf>true</param.embed.ctf>
-    <param.server.ctf>F:\projects\state-estimation-mat\matlab\Splitter\test\Splitter.ctf</param.server.ctf>
+    <param.server.ctf>F:\projects\state-estimation-mat\matlab\Splitter\test\splitter.ctf</param.server.ctf>
     <param.server.readme>F:\projects\state-estimation-mat\matlab\Splitter\test\readme.txt</param.server.readme>
     <param.target.type>subtarget.java.package</param.target.type>
     <param.support.packages />
-    <param.namespace>Splitter</param.namespace>
+    <param.namespace>splitter</param.namespace>
     <param.classorg />
     <param.function.data />
     <param.web.mcr>true</param.web.mcr>
@@ -43,10 +43,10 @@
     <param.net.tsa.enable>false</param.net.tsa.enable>
     <param.net.tsa.assembly />
     <param.net.tsa.interface />
-    <param.net.tsa.namespace>Splitter</param.net.tsa.namespace>
+    <param.net.tsa.namespace>splitter</param.net.tsa.namespace>
     <param.net.tsa.superclass>Splitter</param.net.tsa.superclass>
     <param.net.tsa.metadata />
-    <param.net.tsa.metadata.assembly>F:\projects\state-estimation-mat-piec-api</param.net.tsa.metadata.assembly>
+    <param.net.tsa.metadata.assembly>C:\Program Files\MATLAB\R2014a\bin</param.net.tsa.metadata.assembly>
     <unset>
       <param.icon />
       <param.icons />
@@ -125,7 +125,7 @@
     </fileset.resources>
     <fileset.package />
     <build-deliverables>
-      <file location="F:\projects\state-estimation-mat\matlab\Splitter\test" name="Splitter.jar" optional="false">F:\projects\state-estimation-mat\matlab\Splitter\test\Splitter.jar</file>
+      <file location="F:\projects\state-estimation-mat\matlab\Splitter\test" name="splitter.jar" optional="false">F:\projects\state-estimation-mat\matlab\Splitter\test\splitter.jar</file>
       <file location="F:\projects\state-estimation-mat\matlab\Splitter\test" name="doc" optional="false">F:\projects\state-estimation-mat\matlab\Splitter\test\doc</file>
       <file location="F:\projects\state-estimation-mat\matlab\Splitter\test" name="readme.txt" optional="true">F:\projects\state-estimation-mat\matlab\Splitter\test\readme.txt</file>
     </build-deliverables>
