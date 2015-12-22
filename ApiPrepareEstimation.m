@@ -132,6 +132,7 @@ ns = length(sigma);
 WInv = sparse(1:ns, 1:ns ,  1 ./ sigma .^ 2, ns, ns );
 
 zone.WInv=WInv;
+zone.sigma=sigma;
 
 %% get valid measurement
 zone.vv=validMeasurement(ref,bus,branch);
@@ -145,7 +146,7 @@ if~isempty(ref)
 end
 
 %% initialize estimated voltage
-zone.VEst=ones(bn,1);
+zone.VEst=Vlf;
 
 %% true measurement for test
 zone.zTrue = [

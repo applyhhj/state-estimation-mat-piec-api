@@ -1,4 +1,4 @@
-function [zone, converged, i] = ApiStateEstimate(zone,VExt, mpopt)
+function [zone, converged, i] = ApiStateEstimateNormal(zone,VExt, mpopt)
 
 % as reference bus is processed seperately so we do not need nref
 
@@ -47,19 +47,19 @@ if zone.normF < tol
     end
 end
 
-zone.H = test_ApiGetH( zone,VExt );
-
 %% bad data loop
- max_it_bad_data = 50;
+max_it_bad_data = 50;
 ibd = 1;
+
 while (~converged && ibd <= max_it_bad_data) 
-    zone = Api_GetReducedMatrix( zone );    
+    
+    zone = Api_GetReducedMatrix( zone,VExt );    
     %%-----  do Newton iterations  -----
     i = 0;
     while (~converged && i < max_it)
         %% update iteration counter
         i = i + 1;        
-        zone = Api_EstimateOnce( zone,VExt );
+        zone = Api_EstimateOnce( zone,VExt,1 );
         
         %% output
         if mpopt.verbose > 1

@@ -52,6 +52,7 @@ convergedoPiec=[];
 
 for k=1:size(zoneStruct,2)
     zoneBuses(k,:)=[zoneStruct(k).no,size(zoneStruct(k).bus,1)];
+    zoneStruct(k).case=casedata;
     [zone, convergedi]=Api_RunEstimation(zoneStruct(k),mpopt);
     busPiec=[busPiec;zone.bus];
     genPiec=[genPiec;zone.gen];

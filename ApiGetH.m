@@ -1,4 +1,4 @@
-function [ H ] = ApiGetH( zone,VExt )
+function [ H,HH ] = ApiGetH( zone,VExt )
 %% -----  evaluate Hessian  -----
 IExt=zone.YbusExt*VExt;
 [dSbus_dVm, dSbus_dVa] = dSbus_dV_Piec(zone.Ybus, zone.VEst, IExt);
@@ -14,5 +14,10 @@ H = [
     imag(dSbus_dVa) imag(dSbus_dVm);
     sparse(nb,nb)   speye(nb);
     ];
+
+if nargout>1
+    HH=H(zone.vv,zone.ww);
+end
+
 end
 

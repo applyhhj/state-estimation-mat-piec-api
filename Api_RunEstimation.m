@@ -5,14 +5,18 @@ if nargin < 2
 end
 
 [ zone ] = ApiPrepareEstimation( zone );
-zone.z=zone.zTrue;
+
+%% measurement with error
+err = normrnd( zeros(size(zone.sigma)), zone.sigma );
+zone.z=zone.zTrue+err*0.7;
+
 VExt=zone.VExtlf;
 %% begin estimation
 if ~isempty(zone.ref)&&isempty(zone.f)
     zone.VEst(zone.ref(1))=zone.VRef;
     converged=1;
 else
-    [zone, converged, i] = ApiStateEstimate(zone,VExt, mpopt);
+    [zone, converged, i] = ApiStateEstimateNormal(zone,VExt, mpopt);
     if~isempty(zone.ref)
         zone.VEst(zone.ref(1))=zone.VRef;
     end

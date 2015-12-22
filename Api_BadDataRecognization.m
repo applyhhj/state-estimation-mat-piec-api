@@ -1,10 +1,11 @@
-function [ zone,baddata,converged ] = Api_BadDataRecognization( zone,converged )
+function [ zone,baddata,converged,maxB ] = Api_BadDataRecognization( zone,converged )
 %%-----  Chi squared test for bad data and bad data rejection  -----
-bad_threshold = 6.25;       %% the threshold for bad data = sigma squared
-one_at_a_time = 1;
+% bad_threshold = 6.25;       %% the threshold for bad data = sigma squared
+bad_threshold = 7;       %% the threshold for bad data = sum sigma squared
+one_at_a_time =0;
 baddata=0;
 
-RR = inv(zone.WWInv) - 0.95 * zone.HH * inv(zone.HH' * zone.WWInv * zone.HH) * zone.HH';
+RR = inv(zone.WWInv) - ((0.95 * zone.HH)/(zone.HH' * zone.WWInv * zone.HH)) * zone.HH';
 rr = diag(RR);
 B = zone.ddelz .^ 2 ./ rr;
 [maxB,i_maxB] = max(B);
@@ -22,6 +23,7 @@ end
 if ~isempty(rejected)
     baddata = 1;
     converged = 0;
+    fprintf('\ncase %s; zone %d; rejected bad data!',zone.case,zone.no);
     %         if mpopt.verbose
     %             fprintf('\nRejecting %d measurement(s) as bad data:\n', length(rejected));
     %             fprintf('\tindex\t      B\n');
@@ -31,7 +33,9 @@ if ~isempty(rejected)
     
     %% update measurement index vector
     %         k = find( B < bad_threshold );
-    zone.vv = zone.vv(B < bad_threshold);
+    ids=1:size(zone.vv,1);
+    ids=setdiff(ids',rejected);
+    zone.vv = zone.vv(ids);
 end
 
 end
