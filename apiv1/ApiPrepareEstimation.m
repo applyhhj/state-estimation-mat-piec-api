@@ -6,7 +6,6 @@ function [ zone ] = ApiPrepareEstimation( zone )
 [PQ, PV, REF, NONE, BUS_I, BUS_TYPE, PD, QD, GS, BS, BUS_AREA, VM, ...
     VA, BASE_KV, ZONE, VMAX, VMIN, LAM_P, LAM_Q, MU_VMAX, MU_VMIN] = idx_bus;
 
-
 %% convert to matrix
 bus=zone.bus;
 gen=zone.gen;
@@ -100,7 +99,7 @@ zone.pq=pq;
 Vm=bus(:,VM);
 Va=bus(:,VA).*(pi/180);
 Vlf=Vm.*cos(Va)+Vm.*sin(Va).*1j;
-[~, ~, ~, ~, Sflf, Stlf] = Api_dSbr_dV(zone.f,zone.t,zone.Yf, zone.Yt, Vlf);
+[~, ~, ~, ~, Sflf, Stlf] = dSbr_dV_Api(zone.f,zone.t,zone.Yf, zone.Yt, Vlf);
 
 idsOut=bn+1:bsn;
 VmOut=buses(idsOut,VM);
@@ -132,6 +131,7 @@ ns = length(sigma);
 W = sparse(1:ns, 1:ns ,  sigma .^ 2, ns, ns );
 WInv = sparse(1:ns, 1:ns ,  1 ./ sigma .^ 2, ns, ns );
 
+zone.bad_threshold=sum(sigma.^2);
 zone.W=W;
 zone.WInv=WInv;
 zone.sigma=sigma;
@@ -148,8 +148,10 @@ if~isempty(ref)
 end
 
 %% initialize estimated voltage
-% zone.VEst=Vlf;
-    zone.VEst=ones(zone.bn,1);
+zone.VEst=ones(zone.bn,1);
+zone.VVa = angle(zone.VEst(zone.nref));
+zone.VVm = abs(zone.VEst(zone.nref));
+zone.H= ApiGetH( zone );
 
 %% true measurement for test
 zone.zTrue = [

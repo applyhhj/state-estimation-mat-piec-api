@@ -1,4 +1,4 @@
-function [ zone ] = Api_GetReducedMatrix( zone )
+function [ HH,WW,WWInv,ddelz ] = Api_V1_GetReducedMatrix( H,W,WInv,delz,vv,ww )
 %% find reduced Hessian, covariance matrix, measurements
 % if H is updated by the estimated state then
 % we have to use Vlf as the initial value of VEst to create H matrix and we can not use
@@ -10,18 +10,9 @@ function [ zone ] = Api_GetReducedMatrix( zone )
 % system to create H matrix and keep it constant all through the estimation
 % then we can use flat start. here we do it this way.
 
-if ~isfield(zone,'H')
-    zone.H= ApiGetH( zone );
-end
-if ~isfield(zone,'VVa')
-    zone.VVa = angle(zone.VEst(zone.nref));
-end
-if ~isfield(zone,'VVm')
-    zone.VVm = abs(zone.VEst(zone.nref));
-end
-zone.HH = zone.H(zone.vv,zone.ww);
-zone.WW=zone.W(zone.vv,zone.vv);
-zone.WWInv = zone.WInv(zone.vv,zone.vv);
-zone.ddelz = zone.delz(zone.vv);
+HH = H(vv,ww);
+WW=W(vv,vv);
+WWInv = WInv(vv,vv);
+ddelz = delz(vv);
 end
 

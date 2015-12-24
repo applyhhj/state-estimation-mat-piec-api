@@ -1,7 +1,7 @@
 clc;clear;close all;
 global debug reassign
 path(path,'.\graph');
-
+path(path,'.\extra');
 % casessmall={'case30' 'case300' 'case24_ieee_rts' 'case39'};
 % caseslarge={'case2383wp','case2736sp','case2746wp','case2869pegase','case9241pegase'};
 
@@ -19,7 +19,7 @@ N=300;
 % 1 test cases with bus number less than 300 no err,
 % 2 test dedicated case no err, 
 % 3 test all cases no err
-debug=2;
+debug=3;
 reassign=1;
 
 if debug==2
@@ -29,7 +29,7 @@ end
 warning('off');
 for k=1:size(cases,2)
     fprintf('\nProcessing case %15s',cases{k});
-    [outdiff,zoneBuses]=test_Api_CompareEst(cases{k},N,mpopt);
+    [outdiff,zoneBuses]=Api_CompareEst(cases{k},N,mpopt);
     res(k).case=cases{k};
     res(k).maxBusDiff=max(max(abs(outdiff{1})));
     res(k).maxGenDiff=max(max(abs(outdiff{2})));
