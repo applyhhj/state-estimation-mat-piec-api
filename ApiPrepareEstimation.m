@@ -129,8 +129,10 @@ sigma = [
     0.02 * abs(Vlf)      + 0.0052 * 1.1 * ones(nb,1);
     ] ./ 3;
 ns = length(sigma);
+W = sparse(1:ns, 1:ns ,  sigma .^ 2, ns, ns );
 WInv = sparse(1:ns, 1:ns ,  1 ./ sigma .^ 2, ns, ns );
 
+zone.W=W;
 zone.WInv=WInv;
 zone.sigma=sigma;
 

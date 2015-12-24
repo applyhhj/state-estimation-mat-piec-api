@@ -1,6 +1,6 @@
 function printRes(res)
 
-fprintf('Output differences between estimation and power flow.\n');
+fprintf('\nOutput differences between estimation and power flow.\n');
 fprintf('--------------------------------------------------------------------------------------------------------\n');
 fprintf('%-20s%-15s%-15s%-15s%-15s%-15s%-15s\n','CaseName','Bus','Gen','Branch','EstConv','PFConv','Zone');
 fprintf('========================================================================================================');

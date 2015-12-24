@@ -53,13 +53,13 @@ ibd = 1;
 
 while (~converged && ibd <= max_it_bad_data) 
     
-    zone = Api_GetReducedMatrix( zone,VExt );    
+    zone = Api_GetReducedMatrix( zone );    
     %%-----  do Newton iterations  -----
     i = 0;
     while (~converged && i < max_it)
         %% update iteration counter
         i = i + 1;        
-        zone = Api_EstimateOnce( zone,VExt,1 );
+        zone = Api_EstimateOnce( zone,VExt);
         
         %% output
         if mpopt.verbose > 1
@@ -79,7 +79,7 @@ while (~converged && ibd <= max_it_bad_data)
     end
     
     %% bad data recognization
-    [ zone,baddata,converged,maxB ] = Api_BadDataRecognization( zone,converged );
+    [ zone,baddata,converged,maxB ] = Api_BadDataRecognization( zone,converged,mpopt );
     
     if (baddata == 0)
         converged = 1;

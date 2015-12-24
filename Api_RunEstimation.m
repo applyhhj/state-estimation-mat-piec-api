@@ -8,7 +8,7 @@ end
 
 %% measurement with error
 err = normrnd( zeros(size(zone.sigma)), zone.sigma );
-zone.z=zone.zTrue+err*0.7;
+zone.z=zone.zTrue+err;
 
 VExt=zone.VExtlf;
 %% begin estimation

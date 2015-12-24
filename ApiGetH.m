@@ -1,8 +1,18 @@
-function [ H,HH ] = ApiGetH( zone,VExt )
+function [ H,HH ] = ApiGetH( zone )
 %% -----  evaluate Hessian  -----
-IExt=zone.YbusExt*VExt;
-[dSbus_dVm, dSbus_dVa] = dSbus_dV_Piec(zone.Ybus, zone.VEst, IExt);
-[dSf_dVa, dSf_dVm, dSt_dVa, dSt_dVm] = Api_dSbr_dV(zone.f,zone.t, zone.Yf, zone.Yt, zone.VEst);
+
+% in actual use estimated state should be used to compute H however this
+% may lead to unconverged estimation
+% IExt=zone.YbusExt*VExt;
+% [dSbus_dVm, dSbus_dVa] = dSbus_dV_Piec(zone.Ybus, zone.VEst, IExt);
+% [dSf_dVa, dSf_dVm, dSt_dVa, dSt_dVm] = Api_dSbr_dV(zone.f,zone.t, zone.Yf, zone.Yt, zone.VEst);
+
+% here we use power flow data to compute H and treat H as constant matrix
+% all through the estimation
+IExt=zone.YbusExt*zone.VExtlf;
+
+[dSbus_dVm, dSbus_dVa] = dSbus_dV_Piec(zone.Ybus, zone.Vlf, IExt);
+[dSf_dVa, dSf_dVm, dSt_dVa, dSt_dVm] = Api_dSbr_dV(zone.f,zone.t, zone.Yf, zone.Yt, zone.Vlf);
 nb=zone.bn;
 H = [
     real(dSf_dVa)   real(dSf_dVm);
