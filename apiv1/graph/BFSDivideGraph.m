@@ -1,7 +1,7 @@
 function resultSet=BFSDivideGraph(Graph,i2e)
 % from http://blog.csdn.net/zhangzhengyi03539/article/details/47858979
-% 连通分量(广度优先搜索)
-% Graph 图连通矩阵,无向图，对称矩阵
+% BFS
+% Graph connection matrix
 resultSet=[];
 [m,n]=size(Graph);
 nodelist=zeros(m,1);
