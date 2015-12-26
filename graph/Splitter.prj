@@ -1,0 +1,176 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration build-checksum="1381646168" file="/home/hjh/projects/state-estimation-mat-piec-api/graph/Splitter.prj" location="/home/hjh/projects/state-estimation-mat-piec-api/graph" name="Splitter" preferred-package-location="/home/hjh/projects/state-estimation-mat/matlab/Splitter/redistribution" preferred-package-type="package.type.install" target="target.ezdeploy.library" target-name="MATLAB Compiler for Libraries and Classes">
+    <param.appname>Splitter</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>1.0</param.version>
+    <param.authnamewatermark />
+    <param.email />
+    <param.company />
+    <param.summary />
+    <param.description />
+    <param.screenshot />
+    <param.guid />
+    <param.installpath.string>/Splitter/</param.installpath.string>
+    <param.installpath.combo>option.installpath.user</param.installpath.combo>
+    <param.logo />
+    <param.install.notes>On the target computer, append the following to your LD_LIBRARY_PATH environment variable (Where {MCR_ROOT} is the directory the MCR has been installed into):&lt;br&gt; {MCR_ROOT}/runtime/glnxa64&lt;br&gt; {MCR_ROOT}/bin/glnxa64&lt;br&gt; {MCR_ROOT}/sys/os/glnxa64&lt;br&gt; {MCR_ROOT}/sys/java/jre/glnxa64/jre/lib/amd64/native_threads&lt;br&gt; {MCR_ROOT}/sys/java/jre/glnxa64/jre/lib/amd64/server&lt;br&gt; {MCR_ROOT}/sys/java/jre/glnxa64/jre/lib/amd64&lt;br&gt;</param.install.notes>
+    <param.intermediate>/home/hjh/projects/state-estimation-mat/matlab/Splitter/test</param.intermediate>
+    <param.output>/home/hjh/projects/state-estimation-mat/matlab/Splitter/redistribution</param.output>
+    <param.user.defined.mcr.options />
+    <param.embed.ctf>true</param.embed.ctf>
+    <param.server.ctf>/home/hjh/projects/state-estimation-mat/matlab/Splitter/test/Splitter.ctf</param.server.ctf>
+    <param.server.readme>/home/hjh/projects/state-estimation-mat/matlab/Splitter/test/readme.txt</param.server.readme>
+    <param.target.type>subtarget.java.package</param.target.type>
+    <param.support.packages />
+    <param.namespace>Splitter</param.namespace>
+    <param.classorg />
+    <param.function.data />
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <param.user.only.registration>false</param.user.only.registration>
+    <param.net.framework>option.net.framework.default</param.net.framework>
+    <param.assembly.type>false</param.assembly.type>
+    <param.encryption.key.file />
+    <param.net.enable.remoting>false</param.net.enable.remoting>
+    <param.net.tsa.enable>false</param.net.tsa.enable>
+    <param.net.tsa.assembly />
+    <param.net.tsa.interface />
+    <param.net.tsa.namespace>Splitter</param.net.tsa.namespace>
+    <param.net.tsa.superclass>Splitter</param.net.tsa.superclass>
+    <param.net.tsa.metadata />
+    <param.net.tsa.metadata.assembly>/home/hjh</param.net.tsa.metadata.assembly>
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.summary />
+      <param.description />
+      <param.screenshot />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.install.notes />
+      <param.user.defined.mcr.options />
+      <param.embed.ctf />
+      <param.server.ctf />
+      <param.server.readme />
+      <param.support.packages />
+      <param.namespace />
+      <param.classorg />
+      <param.function.data />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+      <param.user.only.registration />
+      <param.net.framework />
+      <param.assembly.type />
+      <param.encryption.key.file />
+      <param.net.enable.remoting />
+      <param.net.tsa.enable />
+      <param.net.tsa.assembly />
+      <param.net.tsa.interface />
+      <param.net.tsa.namespace />
+      <param.net.tsa.superclass />
+      <param.net.tsa.metadata />
+      <param.net.tsa.metadata.assembly />
+    </unset>
+    <fileset.exports>
+      <file>/home/hjh/projects/state-estimation-mat-piec-api/apiv1/graph/piecewise.m</file>
+      <file>/home/hjh/projects/state-estimation-mat-piec-api/apiv1/graph/reassignZone.m</file>
+    </fileset.exports>
+    <fileset.classes>
+      <entity.package name="">
+        <entity.class name="Splitter">
+          <file>/home/hjh/projects/state-estimation-mat-piec-api/apiv1/graph/piecewise.m</file>
+          <file>/home/hjh/projects/state-estimation-mat-piec-api/apiv1/graph/reassignZone.m</file>
+        </entity.class>
+      </entity.package>
+    </fileset.classes>
+    <fileset.resources>
+      <file>/home/hjh/projects/state-estimation-mat-piec-api/apiv1/extra/diffRep.m</file>
+      <file>/home/hjh/projects/state-estimation-mat-piec-api/apiv1/extra/getBusType.m</file>
+      <file>/home/hjh/projects/state-estimation-mat-piec-api/apiv1/extra/intersectRep.m</file>
+      <file>/home/hjh/projects/state-estimation-mat-piec-api/apiv1/graph/BFSDivideGraph.m</file>
+      <file>/home/hjh/projects/state-estimation-mat-piec-api/apiv1/graph/mergeZones.m</file>
+      <file>/home/hjh/projects/state-estimation-mat-piec-api/apiv1/graph/splitLargeZone.m</file>
+      <file>${PROJECT_ROOT}/splitLargeZone.m</file>
+      <file>/home/hjh/software/matpower5.1/e2i_data.m</file>
+      <file>/home/hjh/software/matpower5.1/e2i_field.m</file>
+      <file>/home/hjh/software/matpower5.1/ext2int.m</file>
+      <file>/home/hjh/software/matpower5.1/get_reorder.m</file>
+      <file>/home/hjh/software/matpower5.1/idx_brch.m</file>
+      <file>/home/hjh/software/matpower5.1/idx_bus.m</file>
+      <file>/home/hjh/software/matpower5.1/idx_gen.m</file>
+      <file>/home/hjh/software/matpower5.1/run_userfcn.m</file>
+    </fileset.resources>
+    <fileset.package />
+    <build-deliverables>
+      <file location="/home/hjh/projects/state-estimation-mat/matlab/Splitter/test" name="readme.txt" optional="true">/home/hjh/projects/state-estimation-mat/matlab/Splitter/test/readme.txt</file>
+      <file location="/home/hjh/projects/state-estimation-mat/matlab/Splitter/test" name="Splitter.jar" optional="false">/home/hjh/projects/state-estimation-mat/matlab/Splitter/test/Splitter.jar</file>
+      <file location="/home/hjh/projects/state-estimation-mat/matlab/Splitter/test" name="doc" optional="false">/home/hjh/projects/state-estimation-mat/matlab/Splitter/test/doc</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>/usr/local/MATLAB/R2014a</root>
+      <toolboxes>
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="fixedpoint" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>false</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>true</linux>
+      <solaris>false</solaris>
+      <osver>3.19.0-31-generic</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>glnxa64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
