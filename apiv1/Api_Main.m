@@ -5,7 +5,7 @@ global debug reassign
 % path(path,'.\graph');
 % path(path,'.\extra');
 % matpath='F:\projects\matpower5.1';
-%matpath='E:\matpower5.1';
+% matpath='E:\matpower5.1';
 
 %% in linux
 path(path,'./graph');

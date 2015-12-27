@@ -60,6 +60,11 @@ brncf=size(brconnf,1);
 
 bus=buses(1:bn,:);
 ii2e=ii2efull(1:bn,:);
+if ~isempty(busbrconnout)
+    ii2eout=ii2efull(bn+1:end,:);
+else
+    ii2eout=[];
+end
 branch=branches(1:brn,:);
 brconnf=branches(brn+1:brn+brncf,:);
 brconnt=branches(brn+brncf+1:end,:);
@@ -150,6 +155,9 @@ zTrue = [
     abs(Vlf);
     ];
 
+%% branch indics
+brids=branch(:,end);
+
 %% ----------------assign section-------------------
 % zone number and base S
 zoneout.num=num;
@@ -157,7 +165,9 @@ zoneout.baseMVA=baseMVA;
 
 % assign numbering
 zoneout.ii2e=ii2e;
+zoneout.ii2eout=ii2eout;
 zoneout.ii2efull=ii2efull;
+zoneout.brids=brids;
 zoneout.nb=bn;
 zoneout.nbr=brn;
 
@@ -183,7 +193,7 @@ zoneout.ref=ref;
 zoneout.pv=pv;
 zoneout.pq=pq;
 
-% for test assign external bus voltages with power flow values
+% assign external bus voltages with power flow values
 zoneout.VExtlf=VExtlf;
 zoneout.Vlf=Vlf;
 

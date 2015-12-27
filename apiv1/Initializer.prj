@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="4012380129" file="/home/hjh/projects/state-estimation-mat-piec-api/apiv1/Initializer.prj" location="/home/hjh/projects/state-estimation-mat-piec-api/apiv1" name="Initializer" preferred-package-location="/home/hjh/projects/state-estimation-mat/matlab/Initializer/redistribution" preferred-package-type="package.type.install" target="target.ezdeploy.library" target-name="MATLAB Compiler for Libraries and Classes">
+  <configuration build-checksum="2763683860" file="/home/hjh/projects/state-estimation-mat-piec-api/apiv1/Initializer.prj" location="/home/hjh/projects/state-estimation-mat-piec-api/apiv1" name="Initializer" preferred-package-location="/home/hjh/projects/state-estimation-mat/matlab/Initializer/redistribution" preferred-package-type="package.type.install" target="target.ezdeploy.library" target-name="MATLAB Compiler for Libraries and Classes">
     <param.appname>Initializer</param.appname>
     <param.icon />
     <param.icons />
