@@ -1,4 +1,4 @@
-function [ zone ] = ApiPrepareEstimation( zone )
+function [ zone ] = Api_PrepareEstimation( zone )
 
 [F_BUS, T_BUS, BR_R, BR_X, BR_B, RATE_A, RATE_B, RATE_C, ...
     TAP, SHIFT, BR_STATUS, PF, QF, PT, QT, MU_SF, MU_ST, ...
@@ -136,20 +136,15 @@ zone.W=W;
 zone.WInv=WInv;
 zone.sigma=sigma;
 
-%% get valid measurement
-zone.vv=validMeasurement(ref,bus,branch);
+%% get state indices
 nref = [pv;pq];
 zone.ww = [ nref; nb+nref ];
 zone.nref=nref;
 
 %% record reference bus voltage
 if~isempty(ref)
-   zone.VRef=Vlf(ref(1)); 
+    zone.VRef=Vlf(ref(1));
 end
-
-%% initialize estimated voltage
-% zone.VEst=Vlf;
-    zone.VEst=ones(zone.bn,1);
 
 %% true measurement for test
 zone.zTrue = [
@@ -162,5 +157,9 @@ zone.zTrue = [
     imag(Sbuslf);
     abs(Vlf);
     ];
+
+%% compute H
+zone.H= Api_GetH( zone );
+
 end
 

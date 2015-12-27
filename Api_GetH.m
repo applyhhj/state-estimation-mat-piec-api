@@ -1,4 +1,4 @@
-function [ H,HH ] = ApiGetH( zone )
+function [ H,HH ] = Api_GetH( zone )
 %% -----  evaluate Hessian  -----
 
 % in actual use estimated state should be used to compute H however this

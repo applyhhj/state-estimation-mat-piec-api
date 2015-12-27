@@ -4,7 +4,7 @@ if nargin < 2
     mpopt = mpoption;
 end
 
-[ zone ] = ApiPrepareEstimation( zone );
+[ zone ] = Api_PrepareEstimation( zone );
 
 %% measurement with error
 err = normrnd( zeros(size(zone.sigma)), zone.sigma );
@@ -16,7 +16,7 @@ if ~isempty(zone.ref)&&isempty(zone.f)
     zone.VEst(zone.ref(1))=zone.VRef;
     converged=1;
 else
-    [zone, converged, i] = ApiStateEstimateNormal(zone,VExt, mpopt);
+    [zone, converged, i] = Api_StateEstimateNormal(zone,VExt, mpopt);
     if~isempty(zone.ref)
         zone.VEst(zone.ref(1))=zone.VRef;
     end

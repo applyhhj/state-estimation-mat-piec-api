@@ -1,4 +1,4 @@
-function [ zone ] = ApiPrepareEstimation( zone )
+function [ zoneout ] = Api_PrepareEstimation( zone )
 
 [F_BUS, T_BUS, BR_R, BR_X, BR_B, RATE_A, RATE_B, RATE_C, ...
     TAP, SHIFT, BR_STATUS, PF, QF, PT, QT, MU_SF, MU_ST, ...
@@ -14,6 +14,31 @@ brconnf=zone.brconnf;
 brconnt=zone.brconnt;
 busbrconnfout=zone.brconnf_out_bus;
 busbrconntout=zone.brconnt_out_bus;
+baseMVA=zone.baseMVA;
+num=zone.no;
+
+%% make sure empty matrics are emtpy
+if isempty(bus)
+   bus=[]; 
+end
+if isempty(gen)
+   gen=[]; 
+end
+if isempty(branch)
+   branch=[]; 
+end
+if isempty(brconnf)
+   brconnf=[]; 
+end
+if isempty(brconnt)
+   brconnt=[]; 
+end
+if isempty(busbrconnfout)
+   busbrconnfout=[]; 
+end
+if isempty(busbrconntout)
+   busbrconntout=[]; 
+end
 
 %% reoder bus number
 busbrconnout=[busbrconnfout;busbrconntout];
@@ -39,13 +64,7 @@ branch=branches(1:brn,:);
 brconnf=branches(brn+1:brn+brncf,:);
 brconnt=branches(brn+brncf+1:end,:);
 
-%% assign numbering
-zone.ii2e=ii2e;
-zone.ii2efull=ii2efull;
-zone.bn=bn;
-
 %% build admittance matrices
-baseMVA=zone.baseMVA;
 [Yd, Yfd, Ytd] = getYMatrix(baseMVA, bus, branch);
 [~, Yfconnf, Ytconnf,Yffconn,~,Yftconn,~] = getYMatrix(baseMVA, buses, brconnf);
 [~, Yfconnt, Ytconnt,~,Yttconn,~,Ytfconn] = getYMatrix(baseMVA, buses, brconnt);
@@ -66,17 +85,6 @@ N=sparse(connbus,1:nYl,1,bn,nYl);
 YLdiag=sparse(diag(YL));
 Ybuseq=Yb-N*YLdiag*N';
 
-%% assign branches and buses for updating
-zone.bus=bus;
-zone.branch=branch;
-zone.gen=gen;
-zone.brconnf=brconnf;
-zone.brconnt=brconnt;
-zone.Yfconnf=Yfconnf;
-zone.Ytconnf=Ytconnf;
-zone.Yfconnt=Yfconnt;
-zone.Ytconnt=Ytconnt;
-
 %% compute external Ybus
 % in area buses are numbered consecutively before out area buses
 bsn=size(buses,1);
@@ -84,38 +92,25 @@ Yconnf=sparse(brconnf(:,F_BUS),brconnf(:,T_BUS)-bn,Yftconn,bn,bsn-bn);
 Yconnt=sparse(brconnt(:,T_BUS),brconnt(:,F_BUS)-bn,Ytfconn,bn,bsn-bn);
 YbusExt=Yconnf+Yconnt;
 
-%% assign variables for estimation
-zone.f=branch(:, F_BUS);
-zone.t=branch(:, T_BUS);
-zone.Ybus=Ybuseq;
-zone.Yf=Yfd;
-zone.Yt=Ytd;
-zone.YbusExt=YbusExt;
-zone.ref=ref;
-zone.pv=pv;
-zone.pq=pq;
-
 %% create inverse of covariance matrix with all measurements
 Vm=bus(:,VM);
 Va=bus(:,VA).*(pi/180);
 Vlf=Vm.*cos(Va)+Vm.*sin(Va).*1j;
-[~, ~, ~, ~, Sflf, Stlf] = dSbr_dV_Api(zone.f,zone.t,zone.Yf, zone.Yt, Vlf);
+f=branch(:, F_BUS);
+t=branch(:, T_BUS);
+[~, ~, ~, ~, Sflf, Stlf] = dSbr_dV_Api(f,t,Yfd, Ytd, Vlf);
 
 idsOut=bn+1:bsn;
 VmOut=buses(idsOut,VM);
 VaOut=buses(idsOut,VA).*(pi/180);
 VExtlf=VmOut.*cos(VaOut)+VmOut.*sin(VaOut).*1j;
 
-%% for test assign external bus voltages with power flow values
-zone.VExtlf=VExtlf;
-zone.Vlf=Vlf;
-
 IExtlf=YbusExt*VExtlf;
 Ibuslf=Ybuseq*Vlf+IExtlf;
 Sbuslf = Vlf .* conj(Ibuslf);
 
 nb = length(Vlf);
-nbr = size(zone.f, 1);
+nbr = size(f, 1);
 fullscale = 30;
 sigma = [
     0.02 * abs(Sflf)      + 0.0052 * fullscale * ones(nbr,1);
@@ -130,31 +125,21 @@ sigma = [
 ns = length(sigma);
 W = sparse(1:ns, 1:ns ,  sigma .^ 2, ns, ns );
 WInv = sparse(1:ns, 1:ns ,  1 ./ sigma .^ 2, ns, ns );
+bad_threshold=sum(sigma.^2);
 
-zone.bad_threshold=sum(sigma.^2);
-zone.W=W;
-zone.WInv=WInv;
-zone.sigma=sigma;
-
-%% get valid measurement
-zone.vv=validMeasurement(ref,bus,branch);
+%% get state indices
 nref = [pv;pq];
-zone.ww = [ nref; nb+nref ];
-zone.nref=nref;
+ww = [ nref; nb+nref ];
 
 %% record reference bus voltage
 if~isempty(ref)
-   zone.VRef=Vlf(ref(1)); 
+   VRef=Vlf(ref(1)); 
+else
+    VRef=[];
 end
 
-%% initialize estimated voltage
-zone.VEst=ones(zone.bn,1);
-zone.VVa = angle(zone.VEst(zone.nref));
-zone.VVm = abs(zone.VEst(zone.nref));
-zone.H= ApiGetH( zone );
-
 %% true measurement for test
-zone.zTrue = [
+zTrue = [
     real(Sflf);
     real(Stlf);
     real(Sbuslf);
@@ -164,5 +149,55 @@ zone.zTrue = [
     imag(Sbuslf);
     abs(Vlf);
     ];
+
+%% ----------------assign section-------------------
+% zone number and base S
+zoneout.num=num;
+zoneout.baseMVA=baseMVA;
+
+% assign numbering
+zoneout.ii2e=ii2e;
+zoneout.ii2efull=ii2efull;
+zoneout.nb=bn;
+zoneout.nbr=brn;
+
+% assign branches and buses for updating
+zoneout.bus=bus;
+zoneout.branch=branch;
+zoneout.gen=gen;
+zoneout.brconnf=brconnf;
+zoneout.brconnt=brconnt;
+zoneout.Yfconnf=Yfconnf;
+zoneout.Ytconnf=Ytconnf;
+zoneout.Yfconnt=Yfconnt;
+zoneout.Ytconnt=Ytconnt;
+
+% assign variables for estimation
+zoneout.f=f;
+zoneout.t=t;
+zoneout.Ybus=Ybuseq;
+zoneout.Yf=Yfd;
+zoneout.Yt=Ytd;
+zoneout.YbusExt=YbusExt;
+zoneout.ref=ref;
+zoneout.pv=pv;
+zoneout.pq=pq;
+
+% for test assign external bus voltages with power flow values
+zoneout.VExtlf=VExtlf;
+zoneout.Vlf=Vlf;
+
+zoneout.bad_threshold=bad_threshold;
+zoneout.W=W;
+zoneout.WInv=WInv;
+zoneout.sigma=sigma;
+
+zoneout.nref=nref;
+zoneout.ww = ww;
+zoneout.VRef=VRef; 
+zoneout.zTrue=zTrue;
+
+% cmopute H
+zoneout.H=Api_GetH( zoneout );
 end
 

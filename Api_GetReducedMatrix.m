@@ -10,15 +10,16 @@ function [ zone ] = Api_GetReducedMatrix( zone )
 % system to create H matrix and keep it constant all through the estimation
 % then we can use flat start. here we do it this way.
 
-if ~isfield(zone,'H')
-    zone.H= ApiGetH( zone );
-end
-if ~isfield(zone,'VVa')
-    zone.VVa = angle(zone.VEst(zone.nref));
-end
-if ~isfield(zone,'VVm')
-    zone.VVm = abs(zone.VEst(zone.nref));
-end
+% if ~isfield(zone,'H')
+%     zone.H= ApiGetH( zone );
+% end
+% if ~isfield(zone,'VVa')
+%     zone.VVa = angle(zone.VEst(zone.nref));
+% end
+% if ~isfield(zone,'VVm')
+%     zone.VVm = abs(zone.VEst(zone.nref));
+% end
+
 zone.HH = zone.H(zone.vv,zone.ww);
 zone.WW=zone.W(zone.vv,zone.vv);
 zone.WWInv = zone.WInv(zone.vv,zone.vv);

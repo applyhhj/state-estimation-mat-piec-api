@@ -1,0 +1,172 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration build-checksum="4012380129" file="/home/hjh/projects/state-estimation-mat-piec-api/apiv1/Initializer.prj" location="/home/hjh/projects/state-estimation-mat-piec-api/apiv1" name="Initializer" preferred-package-location="/home/hjh/projects/state-estimation-mat/matlab/Initializer/redistribution" preferred-package-type="package.type.install" target="target.ezdeploy.library" target-name="MATLAB Compiler for Libraries and Classes">
+    <param.appname>Initializer</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>1.0</param.version>
+    <param.authnamewatermark />
+    <param.email />
+    <param.company />
+    <param.summary />
+    <param.description />
+    <param.screenshot />
+    <param.guid />
+    <param.installpath.string>/Initializer/</param.installpath.string>
+    <param.installpath.combo>option.installpath.user</param.installpath.combo>
+    <param.logo />
+    <param.install.notes>On the target computer, append the following to your LD_LIBRARY_PATH environment variable (Where {MCR_ROOT} is the directory the MCR has been installed into):&lt;br&gt; {MCR_ROOT}/runtime/glnxa64&lt;br&gt; {MCR_ROOT}/bin/glnxa64&lt;br&gt; {MCR_ROOT}/sys/os/glnxa64&lt;br&gt; {MCR_ROOT}/sys/java/jre/glnxa64/jre/lib/amd64/native_threads&lt;br&gt; {MCR_ROOT}/sys/java/jre/glnxa64/jre/lib/amd64/server&lt;br&gt; {MCR_ROOT}/sys/java/jre/glnxa64/jre/lib/amd64&lt;br&gt;</param.install.notes>
+    <param.intermediate>/home/hjh/projects/state-estimation-mat/matlab/Initializer/test</param.intermediate>
+    <param.output>/home/hjh/projects/state-estimation-mat/matlab/Initializer/redistribution</param.output>
+    <param.user.defined.mcr.options />
+    <param.embed.ctf>true</param.embed.ctf>
+    <param.server.ctf>/home/hjh/projects/state-estimation-mat/matlab/Initializer/test/Initializer.ctf</param.server.ctf>
+    <param.server.readme>/home/hjh/projects/state-estimation-mat/matlab/Initializer/test/readme.txt</param.server.readme>
+    <param.target.type>subtarget.java.package</param.target.type>
+    <param.support.packages />
+    <param.namespace>Initializer</param.namespace>
+    <param.classorg />
+    <param.function.data />
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <param.user.only.registration>false</param.user.only.registration>
+    <param.net.framework>option.net.framework.default</param.net.framework>
+    <param.assembly.type>false</param.assembly.type>
+    <param.encryption.key.file />
+    <param.net.enable.remoting>false</param.net.enable.remoting>
+    <param.net.tsa.enable>false</param.net.tsa.enable>
+    <param.net.tsa.assembly />
+    <param.net.tsa.interface />
+    <param.net.tsa.namespace>Initializer</param.net.tsa.namespace>
+    <param.net.tsa.superclass>Initializer</param.net.tsa.superclass>
+    <param.net.tsa.metadata />
+    <param.net.tsa.metadata.assembly>/home/hjh</param.net.tsa.metadata.assembly>
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.summary />
+      <param.description />
+      <param.screenshot />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.install.notes />
+      <param.user.defined.mcr.options />
+      <param.embed.ctf />
+      <param.server.ctf />
+      <param.server.readme />
+      <param.support.packages />
+      <param.namespace />
+      <param.classorg />
+      <param.function.data />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+      <param.user.only.registration />
+      <param.net.framework />
+      <param.assembly.type />
+      <param.encryption.key.file />
+      <param.net.enable.remoting />
+      <param.net.tsa.enable />
+      <param.net.tsa.assembly />
+      <param.net.tsa.interface />
+      <param.net.tsa.namespace />
+      <param.net.tsa.superclass />
+      <param.net.tsa.metadata />
+      <param.net.tsa.metadata.assembly />
+    </unset>
+    <fileset.exports>
+      <file>${PROJECT_ROOT}/Api_PrepareEstimation.m</file>
+    </fileset.exports>
+    <fileset.classes>
+      <entity.package name="">
+        <entity.class name="Initializer">
+          <file>${PROJECT_ROOT}/Api_PrepareEstimation.m</file>
+        </entity.class>
+      </entity.package>
+    </fileset.classes>
+    <fileset.resources>
+      <file>${PROJECT_ROOT}/Api_GetH.m</file>
+      <file>${PROJECT_ROOT}/extra/dSbr_dV_Api.m</file>
+      <file>${PROJECT_ROOT}/extra/dSbus_dV_Piec.m</file>
+      <file>${PROJECT_ROOT}/extra/getBusType.m</file>
+      <file>${PROJECT_ROOT}/extra/getYMatrix.m</file>
+      <file>/home/hjh/software/matpower5.1/e2i_data.m</file>
+      <file>/home/hjh/software/matpower5.1/e2i_field.m</file>
+      <file>/home/hjh/software/matpower5.1/ext2int.m</file>
+      <file>/home/hjh/software/matpower5.1/get_reorder.m</file>
+      <file>/home/hjh/software/matpower5.1/idx_brch.m</file>
+      <file>/home/hjh/software/matpower5.1/idx_bus.m</file>
+      <file>/home/hjh/software/matpower5.1/idx_gen.m</file>
+      <file>/home/hjh/software/matpower5.1/run_userfcn.m</file>
+    </fileset.resources>
+    <fileset.package />
+    <build-deliverables>
+      <file location="/home/hjh/projects/state-estimation-mat/matlab/Initializer/test" name="doc" optional="false">/home/hjh/projects/state-estimation-mat/matlab/Initializer/test/doc</file>
+      <file location="/home/hjh/projects/state-estimation-mat/matlab/Initializer/test" name="readme.txt" optional="true">/home/hjh/projects/state-estimation-mat/matlab/Initializer/test/readme.txt</file>
+      <file location="/home/hjh/projects/state-estimation-mat/matlab/Initializer/test" name="Initializer.jar" optional="false">/home/hjh/projects/state-estimation-mat/matlab/Initializer/test/Initializer.jar</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>/usr/local/MATLAB/R2014a</root>
+      <toolboxes>
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="fixedpoint" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>false</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>true</linux>
+      <solaris>false</solaris>
+      <osver>3.19.0-31-generic</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>glnxa64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

@@ -1,4 +1,4 @@
-function [zone, converged, i] = ApiStateEstimateNormal(zone,VExt, mpopt)
+function [zone, converged, i] = Api_StateEstimateNormal(zone,VExt, mpopt)
 
 % as reference bus is processed seperately so we do not need nref
 
@@ -31,7 +31,17 @@ max_it  = mpopt.pf.nr.max_it;
 converged = 0;
 i = 0;
 
-%% initial estimation
+%% reset state
+% initialize estimated voltage
+% zone.VEst=Vlf;
+zone.VEst=ones(zone.bn,1);
+% initialize VVa VVm
+zone.VVa = angle(zone.VEst(zone.nref));
+zone.VVm = abs(zone.VEst(zone.nref));
+% get valid measurement
+zone.vv=validMeasurement(zone.ref,zone.bus,zone.branch);
+
+%% first estimation, compute delz
 zone=Api_FirstEstimation( zone,VExt );
 
 %% check tolerance
@@ -54,14 +64,14 @@ ibd = 1;
 while (~converged && ibd <= max_it_bad_data) 
     
     zone = Api_GetReducedMatrix( zone );    
-    %%-----  do Newton iterations  -----
+    %% -----  do Newton iterations  -----
     i = 0;
     while (~converged && i < max_it)
-        %% update iteration counter
+        % update iteration counter
         i = i + 1;        
         zone = Api_EstimateOnce( zone,VExt);
         
-        %% output
+        % output
         if mpopt.verbose > 1
             fprintf('\n%3d    %10.3e      %10.3e', i, zone.normF, zone.step);
         end

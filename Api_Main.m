@@ -1,12 +1,18 @@
 clc;clear;close all;
 global debug reassign
-path(path,'.\graph');
+
+%% in windows
+% path(path,'.\graph');
+% matpath='F:\projects\matpower5.1';
+% matpath='E:\matpower5.1';
+
+%% in linux
+path(path,'./graph');
+matpath='/home/hjh/software/matpower5.1';
 
 % casessmall={'case30' 'case300' 'case24_ieee_rts' 'case39'};
 % caseslarge={'case2383wp','case2736sp','case2746wp','case2869pegase','case9241pegase'};
 
-matpath='F:\projects\matpower5.1';
-%matpath='E:\matpower5.1';
 exclude_files={'info','format'};
 cases=getAllCases(matpath,exclude_files);
 
@@ -29,7 +35,7 @@ end
 warning('off');
 for k=1:size(cases,2)
     fprintf('\nProcessing case %15s',cases{k});
-    [outdiff,zoneBuses]=test_Api_CompareEst(cases{k},N,mpopt);
+    [outdiff,zoneBuses]=Api_CompareEst(cases{k},N,mpopt);
     res(k).case=cases{k};
     res(k).maxBusDiff=max(max(abs(outdiff{1})));
     res(k).maxGenDiff=max(max(abs(outdiff{2})));
