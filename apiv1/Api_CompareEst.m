@@ -18,24 +18,25 @@ end
 
 [baseMVA, bus, gen, branch, success,i2e,Sbuslf] = solvePowerFlow(casedata,mpopt);
 
-if ~success
-    return;
-end
-
-if reassign
-    bus=reassignZone(bus,gen,branch,N);
+if debug==2&&exist(['zone', casedata,'.mat'],'file')
+    load(['zone', casedata,'.mat']);
 else
-    [ref, ~, ~] = getBusType(bus, gen);
-    bus(ref,ZONE)=-1;
-    bus(ref,BUS_AREA)=-1;
-    zones=sort(unique(bus(:,ZONE)));
-    areas=sort(unique(bus(:,BUS_AREA)));
-    if size(zones,1)<size(areas,1)
-        bus(:,ZONE)=bus(:,BUS_AREA);       
+    if ~success
+        return;
+    end
+    if reassign
+        bus=reassignZone(bus,gen,branch,N);
+    else
+        [ref, ~, ~] = getBusType(bus, gen);
+        bus(ref,ZONE)=-1;
+        bus(ref,BUS_AREA)=-1;
+        zones=sort(unique(bus(:,ZONE)));
+        areas=sort(unique(bus(:,BUS_AREA)));
+        if size(zones,1)<size(areas,1)
+            bus(:,ZONE)=bus(:,BUS_AREA);
+        end
     end
 end
-
-zoneStruct=piecewise(baseMVA,bus,gen,branch);
 
 % add branch ids
 brids=(1:size(branch,1))';
@@ -63,7 +64,7 @@ end
 
 [r,c]=size(brconnPiec);
 brconnPiec=sortrows(brconnPiec,c);
-% each connection branch is computed twice and after sorting branches with the 
+% each connection branch is computed twice and after sorting branches with the
 % same id will be adjcent to each other so we only need to add the even
 % rows with the odd rows of connection branch and then divide 2.
 brconnPiec=(brconnPiec(1:2:r,:)+brconnPiec(2:2:r,:))/2;
@@ -91,6 +92,10 @@ busSort=sortrows(bus,1:size(bus,2));
 % branchSort=sortrows(branch,1:size(branch,2));
 genSort=sortrows(gen,size(gen,2));
 branchSort=sortrows(branch,size(branch,2));
+
+if debug==2&&exist(['zone', casedata,'.mat'],'file')
+    busSort(:,ZONE)=busPiecSort(:,ZONE);
+end
 
 outdiff=[{busSort-busPiecSort},{genSort-genPiecSort},{branchSort-branchPiecSort},converged,success];
 

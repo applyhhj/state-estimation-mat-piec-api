@@ -38,13 +38,13 @@ zone.VEst=ones(zone.nb,1);
 % initialize VVa VVm
 zone.VVa = angle(zone.VEst(zone.nref));
 zone.VVm = abs(zone.VEst(zone.nref));
-% get valid measurement
-zone.vv=validMeasurement(zone.ref,zone.nb,zone.nbr,zone.f,zone.t);
 
 %% first estimation, compute delz
 % zone=Api_FirstEstimation( zone,VExt );
 [ zone.delz,zone.normF ] = Api_V1_FirstEstimation( zone.VEst,zone.f,zone.t,...
     zone.Yf,zone.Yt,zone.Ybus,zone.YbusExt,zone.z,zone.WInv ,VExt);
+% get valid measurement
+zone.vv=validMeasurement(zone.ref,zone.nb,zone.nbr,zone.f,zone.t);
 
 %% check tolerance
 if mpopt.verbose > 1
@@ -98,16 +98,9 @@ while (~converged && ibd <= max_it_bad_data)
     
     %% bad data recognization
 %     [ zone,baddata,converged,maxB ] = Api_BadDataRecognization( zone,converged,mpopt );
-    [ zone.vv,baddata,converged,maxB ] = Api_V1_BadDataRecognization( ...
-        zone.WW,zone.HH,zone.WWInv,zone.vv,zone.ddelz,zone.bad_threshold,converged );
-    
-    if (baddata == 0)
-        converged = 1;
-        if mpopt.verbose
-            fprintf('\nNo remaining bad data, after discarding data %d time(s).\n', ibd-1);
-            fprintf('Largest value of B = %.2f\n', maxB);
-        end
-    end
+    [ zone.vv,converged ] = Api_V1_BadDataRecognization( ...
+        zone.WW,zone.HH,zone.WWInv,zone.vv,zone.ddelz,zone.bad_threshold);
+
     ibd = ibd + 1;
 end
 
