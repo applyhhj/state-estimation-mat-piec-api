@@ -1,4 +1,4 @@
-function [ delz,normF ] = Api_V1_FirstEstimation( VEst,f,t,Yf,Yt,Ybus,YbusExt,z,WInv,VExt)
+function [ delz,normF,vv ] = Api_V1_FirstEstimation( VEst,VExt,z,ref,nb,nbr,f,t,Yf,Yt,Ybus,YbusExt,WInv)
 %% compute estimated measurement
 z_est=Api_V1_ComputeEstimate(VEst,f,t,Yf,Yt,Ybus,YbusExt,VExt);
 
@@ -6,5 +6,7 @@ z_est=Api_V1_ComputeEstimate(VEst,f,t,Yf,Yt,Ybus,YbusExt,VExt);
 delz = z - z_est;
 normF = delz' * WInv * delz;
 
+%% initialize vv
+vv=validMeasurement(ref,nb,nbr,f,t);
 end
 

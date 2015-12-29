@@ -1,4 +1,4 @@
-function [ vv,converged ] = Api_V1_BadDataRecognization( WW,HH,WWInv,vv,ddelz,bad_threshold)
+function [ vv,converged ] = Api_V1_BadDataRecognition( WW,HH,WWInv,vv,ddelz,bad_threshold)
 
 %%-----  Chi squared test for bad data and bad data rejection  -----
 % bad_threshold = 6.25;       %% the threshold for bad data = sigma squared

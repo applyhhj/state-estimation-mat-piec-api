@@ -41,10 +41,12 @@ zone.VVm = abs(zone.VEst(zone.nref));
 
 %% first estimation, compute delz
 % zone=Api_FirstEstimation( zone,VExt );
-[ zone.delz,zone.normF ] = Api_V1_FirstEstimation( zone.VEst,zone.f,zone.t,...
-    zone.Yf,zone.Yt,zone.Ybus,zone.YbusExt,zone.z,zone.WInv ,VExt);
+[ zone.delz,zone.normF,zone.vv ] = Api_V1_FirstEstimation( zone.VEst,VExt,zone.z,...
+    zone.ref,zone.nb,zone.nbr,...
+    zone.f,zone.t,zone.Yf,zone.Yt,zone.Ybus,zone.YbusExt,zone.WInv );
+
 % get valid measurement
-zone.vv=validMeasurement(zone.ref,zone.nb,zone.nbr,zone.f,zone.t);
+% zone.vv=validMeasurement(zone.ref,zone.nb,zone.nbr,zone.f,zone.t);
 
 %% check tolerance
 if mpopt.verbose > 1
@@ -52,6 +54,7 @@ if mpopt.verbose > 1
     fprintf('\n----  --------------  --------------');
     fprintf('\n%3d    %10.3e      %10.3e', i, zone.normF, 0);
 end
+% ????
 if zone.normF < tol
     converged = 1;
     if mpopt.verbose > 1
@@ -67,7 +70,7 @@ while (~converged && ibd <= max_it_bad_data)
     
 %     zone = Api_GetReducedMatrix( zone );    
     [ zone.HH,zone.WW,zone.WWInv,zone.ddelz ] = Api_V1_GetReducedMatrix( ...
-        zone.H,zone.W,zone.WInv,zone.delz,zone.vv,zone.ww );
+        zone.H,zone.W,zone.WInv,zone.ww,zone.delz,zone.vv );
     %% -----  do Newton iterations  -----
     i = 0;
     while (~converged && i < max_it)
@@ -98,7 +101,7 @@ while (~converged && ibd <= max_it_bad_data)
     
     %% bad data recognization
 %     [ zone,baddata,converged,maxB ] = Api_BadDataRecognization( zone,converged,mpopt );
-    [ zone.vv,converged ] = Api_V1_BadDataRecognization( ...
+    [ zone.vv,converged ] = Api_V1_BadDataRecognition( ...
         zone.WW,zone.HH,zone.WWInv,zone.vv,zone.ddelz,zone.bad_threshold);
 
     ibd = ibd + 1;

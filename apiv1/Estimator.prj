@@ -1,6 +1,6 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="2763683860" file="/home/hjh/projects/state-estimation-mat-piec-api/apiv1/Initializer.prj" location="/home/hjh/projects/state-estimation-mat-piec-api/apiv1" name="Initializer" preferred-package-location="/home/hjh/projects/state-estimation-mat/matlab/Initializer/redistribution" preferred-package-type="package.type.install" target="target.ezdeploy.library" target-name="MATLAB Compiler for Libraries and Classes">
-    <param.appname>Initializer</param.appname>
+  <configuration build-checksum="2641789304" file="/home/hjh/projects/state-estimation-mat-piec-api/apiv1/Estimator.prj" location="/home/hjh/projects/state-estimation-mat-piec-api/apiv1" name="Estimator" preferred-package-location="/home/hjh/projects/state-estimation-mat/matlab/Estimator/redistribution" preferred-package-type="package.type.install" target="target.ezdeploy.library" target-name="MATLAB Compiler for Libraries and Classes">
+    <param.appname>Estimator</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
@@ -11,19 +11,19 @@
     <param.description />
     <param.screenshot />
     <param.guid />
-    <param.installpath.string>/Initializer/</param.installpath.string>
+    <param.installpath.string>/Estimator/</param.installpath.string>
     <param.installpath.combo>option.installpath.user</param.installpath.combo>
     <param.logo />
     <param.install.notes>On the target computer, append the following to your LD_LIBRARY_PATH environment variable (Where {MCR_ROOT} is the directory the MCR has been installed into):&lt;br&gt; {MCR_ROOT}/runtime/glnxa64&lt;br&gt; {MCR_ROOT}/bin/glnxa64&lt;br&gt; {MCR_ROOT}/sys/os/glnxa64&lt;br&gt; {MCR_ROOT}/sys/java/jre/glnxa64/jre/lib/amd64/native_threads&lt;br&gt; {MCR_ROOT}/sys/java/jre/glnxa64/jre/lib/amd64/server&lt;br&gt; {MCR_ROOT}/sys/java/jre/glnxa64/jre/lib/amd64&lt;br&gt;</param.install.notes>
-    <param.intermediate>/home/hjh/projects/state-estimation-mat/matlab/Initializer/test</param.intermediate>
-    <param.output>/home/hjh/projects/state-estimation-mat/matlab/Initializer/redistribution</param.output>
+    <param.intermediate>/home/hjh/projects/state-estimation-mat/matlab/Estimator/test</param.intermediate>
+    <param.output>/home/hjh/projects/state-estimation-mat/matlab/Estimator/redistribution</param.output>
     <param.user.defined.mcr.options />
     <param.embed.ctf>true</param.embed.ctf>
-    <param.server.ctf>/home/hjh/projects/state-estimation-mat/matlab/Initializer/test/Initializer.ctf</param.server.ctf>
-    <param.server.readme>/home/hjh/projects/state-estimation-mat/matlab/Initializer/test/readme.txt</param.server.readme>
+    <param.server.ctf>/home/hjh/projects/state-estimation-mat/matlab/Estimator/test/Estimator.ctf</param.server.ctf>
+    <param.server.readme>/home/hjh/projects/state-estimation-mat/matlab/Estimator/test/readme.txt</param.server.readme>
     <param.target.type>subtarget.java.package</param.target.type>
     <param.support.packages />
-    <param.namespace>Initializer</param.namespace>
+    <param.namespace>Estimator</param.namespace>
     <param.classorg />
     <param.function.data />
     <param.web.mcr>true</param.web.mcr>
@@ -43,8 +43,8 @@
     <param.net.tsa.enable>false</param.net.tsa.enable>
     <param.net.tsa.assembly />
     <param.net.tsa.interface />
-    <param.net.tsa.namespace>Initializer</param.net.tsa.namespace>
-    <param.net.tsa.superclass>Initializer</param.net.tsa.superclass>
+    <param.net.tsa.namespace>Estimator</param.net.tsa.namespace>
+    <param.net.tsa.superclass>Estimator</param.net.tsa.superclass>
     <param.net.tsa.metadata />
     <param.net.tsa.metadata.assembly>/home/hjh</param.net.tsa.metadata.assembly>
     <unset>
@@ -94,20 +94,32 @@
     </unset>
     <fileset.exports>
       <file>${PROJECT_ROOT}/Api_PrepareEstimation.m</file>
+      <file>${PROJECT_ROOT}/Api_V2_EstimateOnce.m</file>
+      <file>${PROJECT_ROOT}/Api_V2_FirstEstimation.m</file>
+      <file>${PROJECT_ROOT}/Api_V2_GetReducedMatrix.m</file>
     </fileset.exports>
     <fileset.classes>
       <entity.package name="">
-        <entity.class name="Initializer">
+        <entity.class name="Estimator">
           <file>${PROJECT_ROOT}/Api_PrepareEstimation.m</file>
+          <file>${PROJECT_ROOT}/Api_V2_EstimateOnce.m</file>
+          <file>${PROJECT_ROOT}/Api_V2_FirstEstimation.m</file>
+          <file>${PROJECT_ROOT}/Api_V2_GetReducedMatrix.m</file>
         </entity.class>
       </entity.package>
     </fileset.classes>
     <fileset.resources>
       <file>${PROJECT_ROOT}/Api_GetH.m</file>
+      <file>${PROJECT_ROOT}/Api_V1_ComputeEstimate.m</file>
+      <file>${PROJECT_ROOT}/Api_V1_FirstEstimation.m</file>
+      <file>${PROJECT_ROOT}/Api_V1_GetReducedMatrix.m</file>
+      <file>${PROJECT_ROOT}/Api_V2_ComputeEstimate.m</file>
       <file>${PROJECT_ROOT}/extra/dSbr_dV_Api.m</file>
       <file>${PROJECT_ROOT}/extra/dSbus_dV_Piec.m</file>
+      <file>${PROJECT_ROOT}/extra/diffRep.m</file>
       <file>${PROJECT_ROOT}/extra/getBusType.m</file>
       <file>${PROJECT_ROOT}/extra/getYMatrix.m</file>
+      <file>${PROJECT_ROOT}/extra/validMeasurement.m</file>
       <file>/home/hjh/software/matpower5.1/e2i_data.m</file>
       <file>/home/hjh/software/matpower5.1/e2i_field.m</file>
       <file>/home/hjh/software/matpower5.1/ext2int.m</file>
@@ -119,9 +131,9 @@
     </fileset.resources>
     <fileset.package />
     <build-deliverables>
-      <file location="/home/hjh/projects/state-estimation-mat/matlab/Initializer/test" name="doc" optional="false">/home/hjh/projects/state-estimation-mat/matlab/Initializer/test/doc</file>
-      <file location="/home/hjh/projects/state-estimation-mat/matlab/Initializer/test" name="readme.txt" optional="true">/home/hjh/projects/state-estimation-mat/matlab/Initializer/test/readme.txt</file>
-      <file location="/home/hjh/projects/state-estimation-mat/matlab/Initializer/test" name="Initializer.jar" optional="false">/home/hjh/projects/state-estimation-mat/matlab/Initializer/test/Initializer.jar</file>
+      <file location="/home/hjh/projects/state-estimation-mat/matlab/Estimator/test" name="Estimator.jar" optional="false">/home/hjh/projects/state-estimation-mat/matlab/Estimator/test/Estimator.jar</file>
+      <file location="/home/hjh/projects/state-estimation-mat/matlab/Estimator/test" name="readme.txt" optional="true">/home/hjh/projects/state-estimation-mat/matlab/Estimator/test/readme.txt</file>
+      <file location="/home/hjh/projects/state-estimation-mat/matlab/Estimator/test" name="doc" optional="false">/home/hjh/projects/state-estimation-mat/matlab/Estimator/test/doc</file>
     </build-deliverables>
     <workflow />
     <matlab>
@@ -162,7 +174,7 @@
       <vista>false</vista>
       <linux>true</linux>
       <solaris>false</solaris>
-      <osver>3.19.0-31-generic</osver>
+      <osver>3.19.0-42-generic</osver>
       <os32>false</os32>
       <os64>true</os64>
       <arch>glnxa64</arch>

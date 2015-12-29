@@ -138,7 +138,10 @@ ww = [ nref; nb+nref ];
 
 %% record reference bus voltage
 if~isempty(ref)
+   refout=ii2e;
    VRef=Vlf(ref(1)); 
+   VaRef=Va(ref(1));
+   VmRef=Vm(ref(1));
 else
     VRef=[];
 end
@@ -206,6 +209,12 @@ zoneout.nref=nref;
 zoneout.ww = ww;
 zoneout.VRef=VRef; 
 zoneout.zTrue=zTrue;
+
+if~isempty(ref)
+    zoneout.refout=refout;
+    zoneout.VaRef=VaRef;
+    zoneout.VmRef=VmRef;
+end
 
 % cmopute H
 zoneout.H=Api_GetH( zoneout );
